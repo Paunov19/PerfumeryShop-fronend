@@ -27,7 +27,10 @@ const OrderScreen = () => {
         return <div>Error: {userOrdersQuery.error.message}</div>;
     }
 
-    const userOrders = userOrdersQuery.data;
+    // Показваме поръчките обратно по дата
+    const userOrders = userOrdersQuery.data.sort(
+        (a, b) => new Date(b.orderDate) - new Date(a.orderDate)
+    );
 
     const formatDate = (date) => {
         const options = {

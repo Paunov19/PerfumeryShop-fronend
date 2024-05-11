@@ -79,12 +79,14 @@ const EmployeeUserOrdersScreen = () => {
         return formattedDate;
     };
 
-    const filteredOrders = userOrders.filter((order) =>
-        filter
-            ? new Date(order.orderDate).toISOString().split("T")[0] ===
-                  filter || order.status === filter
-            : true
-    );
+    const filteredOrders = userOrders
+        .sort((a, b) => new Date(b.orderDate) - new Date(a.orderDate)) // Сортираме поръчките по намаляващ ред на дата
+        .filter((order) =>
+            filter
+                ? new Date(order.orderDate).toISOString().split("T")[0] ===
+                      filter || order.status === filter
+                : true
+        );
 
     return (
         <Screen>
